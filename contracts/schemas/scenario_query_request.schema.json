@@ -1,18 +1,66 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.sih26161.org/scenario_query_request.schema.json",
-  "title": "Scenario Query Request",
+  "title": "Scenario Resolve Request",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
-    "id": {
-      "type": "string"
-    },
-    "created_at": {
+    "schema_version": {"type": "string"},
+    "site_id": {"type": "string", "minLength": 1},
+    "input_mode": {
       "type": "string",
-      "format": "date-time"
+      "enum": ["severity_slider", "exact_values"]
+    },
+    "severity_level_0_10": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "maximum": 10
+    },
+    "exact_values": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "initial_water_level_m": {"type": ["number", "null"]},
+            "breach_width_m": {"type": ["number", "null"], "exclusiveMinimum": 0},
+            "breach_depth_m": {"type": ["number", "null"], "exclusiveMinimum": 0},
+            "formation_time_hr": {"type": ["number", "null"], "minimum": 0.05, "maximum": 48},
+            "downstream_discharge_m3s": {"type": ["number", "null"], "minimum": 0}
+          },
+          "required": [
+            "initial_water_level_m",
+            "breach_width_m",
+            "breach_depth_m",
+            "formation_time_hr",
+            "downstream_discharge_m3s"
+          ]
+        },
+        {"type": "null"}
+      ]
     }
   },
   "required": [
-    "id"
+    "schema_version",
+    "site_id",
+    "input_mode",
+    "severity_level_0_10",
+    "exact_values"
+  ],
+  "oneOf": [
+    {
+      "properties": {
+        "input_mode": {"const": "severity_slider"},
+        "severity_level_0_10": {"type": "integer"},
+        "exact_values": {"type": "null"}
+      }
+    },
+    {
+      "properties": {
+        "input_mode": {"const": "exact_values"},
+        "severity_level_0_10": {"type": "null"},
+        "exact_values": {"type": "object"}
+      }
+    }
   ]
 }

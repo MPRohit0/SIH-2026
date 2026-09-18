@@ -1,6 +1,13 @@
 {
-  "id": "src-dam-001",
+  "failure_source_id": "src-dam-001",
   "type": "engineered_dam",
+  "name": "Reference engineered dam",
+  "location": {
+    "lon": 84.2,
+    "lat": 28.1
+  },
   "height_m": 85.0,
-  "reservoir_capacity_m3": 45000000
+  "storage_volume_m3": 45000000,
+  "catchment_area_km2": null,
+  "data_source": "contract-fixture"
 }

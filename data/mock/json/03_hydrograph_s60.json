@@ -1,6 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "hydrograph_id": "hydro_demo_s60_froehlich",
+  "schema_version": "1.0.0",
+  "series_id": "hydro_demo_s60_froehlich",
   "points": [
     {
       "t_min": 0,

@@ -3,16 +3,161 @@
   "$id": "https://schemas.sih26161.org/physical_scenario.schema.json",
   "title": "Physical Scenario",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
-    "id": {
+    "schema_version": {
       "type": "string"
     },
-    "created_at": {
+    "scenario_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "site_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "failure_source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity_index": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "severity_level_0_10": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "maximum": 10
+    },
+    "initial_conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "initial_water_level_m": {
+          "type": ["number", "null"]
+        },
+        "downstream_discharge_m3s": {
+          "type": ["number", "null"],
+          "minimum": 0
+        }
+      },
+      "required": [
+        "initial_water_level_m",
+        "downstream_discharge_m3s"
+      ]
+    },
+    "breach": {
+      "$ref": "https://schemas.sih26161.org/breach_parameters.schema.json"
+    },
+    "macdonald_inputs": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "material_classification": {
+          "type": "string",
+          "enum": ["earthfill", "earthfill_clay_core_rockfill"]
+        },
+        "V_out_m3": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Volume of water passing through the breach, m3."
+        },
+        "h_w_m": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Water depth above the breach bottom, m."
+        },
+        "Vw_m3": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Reservoir volume at failure, m3."
+        },
+        "hw_m": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Water depth used by the peak-discharge relationship, m."
+        },
+        "crest_width_C_m": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Dam crest width C, m."
+        },
+        "upstream_slope_Z1": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Upstream dam slope ratio Z1, dimensionless."
+        },
+        "downstream_slope_Z2": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Downstream dam slope ratio Z2, dimensionless."
+        },
+        "peak_discharge_relationship": {
+          "type": "string",
+          "enum": ["best_fit", "envelope"],
+          "default": "best_fit"
+        }
+      },
+      "required": [
+        "material_classification",
+        "V_out_m3",
+        "h_w_m",
+        "Vw_m3",
+        "hw_m",
+        "crest_width_C_m",
+        "upstream_slope_Z1",
+        "downstream_slope_Z2",
+        "peak_discharge_relationship"
+      ]
+    },
+    "discharge_series_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "breach_engine_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
       "type": "string",
       "format": "date-time"
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "breach": {
+            "properties": {
+              "method": {
+                "const": "macdonald_langridge_monopolis"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": ["macdonald_inputs"],
+        "properties": {
+          "macdonald_inputs": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ],
   "required": [
-    "id"
+    "schema_version",
+    "scenario_id",
+    "site_id",
+    "failure_source_id",
+    "severity_index",
+    "severity_level_0_10",
+    "initial_conditions",
+    "breach",
+    "discharge_series_id",
+    "breach_engine_version",
+    "generated_at"
   ]
 }

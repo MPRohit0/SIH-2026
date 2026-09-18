@@ -313,8 +313,17 @@ BreachParameters {
   breach_width_m: float
   breach_depth_m: float
   formation_time_hr: float
-  peak_discharge_m3s: float
+  peak_discharge_m3s: float | null
   method: "froehlich" | "macdonald_langridge_monopolis"
+  peak_discharge_provenance: {
+    source: "froehlich_2008"
+      | "macdonald_langridge_monopolis"
+      | "user_supplied"
+      | "hydraulic_solver"
+      | "unavailable"
+    method_version: string | null
+    input_basis: string | null
+  } | null
 }
 ```
 
@@ -330,16 +339,24 @@ Validation:
     
 - `0.05 <= formation_time_hr <= 48`
     
-- `0 < peak_discharge_m3s <= 100000`
+- if `peak_discharge_m3s != null`, `0 < peak_discharge_m3s <= 100000`
     
-- `peak_discharge_m3s == max(discharge_series.points[].discharge_m3s)` within defined floating-point tolerance
+- when a discharge series is present and the peak is a series summary,
+  `peak_discharge_m3s == max(discharge_series.points[].discharge_m3s)` within
+  defined floating-point tolerance
+- `null` means no scientifically supported peak estimate is available from
+  the selected M2 method; it does not mean zero
+- peak-discharge provenance must distinguish empirical estimates,
+  user-supplied values, hydraulic-solver outputs, and unavailable values
     
 
 If both breach formulas are run, Module 2 creates **separate PhysicalScenario objects**, one per selected method. They must have distinct `scenario_id`s.
 
 ## 2.6 DischargeSeries
 
-Used for both model forcing hydrographs and observed historical discharge series.
+Used for approved model forcing hydrographs and observed historical discharge
+series. M2 does not generate one unless an independently approved hydrograph
+method exists.
 
 ```
 DischargeSeries {
@@ -380,7 +397,7 @@ PhysicalScenario {
   site_id: string
   failure_source_id: string
 
-  severity_index: int                 // 0..100, abstract scenario/interpolation axis
+  severity_index: int | null          // 0..100 when catalog-resolved
   severity_level_0_10: int | null     // original UI slider level, if slider mode was used
 
   initial_conditions: {
@@ -389,14 +406,65 @@ PhysicalScenario {
   }
 
   breach: BreachParameters
-  discharge_series_id: string
+  macdonald_inputs: MacDonaldInputs | null
+  discharge_series_id: string | null
 
   breach_engine_version: string
   generated_at: string
 }
+
+MacDonaldInputs {
+  material_classification:
+    "earthfill" | "earthfill_clay_core_rockfill"
+  V_out_m3: float
+  h_w_m: float
+  Vw_m3: float
+  hw_m: float
+  crest_width_C_m: float
+  upstream_slope_Z1: float
+  downstream_slope_Z2: float
+  peak_discharge_relationship: "best_fit" | "envelope"
+}
 ```
 
-`severity_index` is an abstract normalized index. It is **not** a statement that a percentage of dam height failed.
+`macdonald_inputs` is a method-specific input namespace and is not part of
+`BreachParameters`, which remains the empirical result object.
+
+When `breach.method == "macdonald_langridge_monopolis"`, `macdonald_inputs`
+is required and every field in it is required:
+
+- `material_classification` selects the approved eroded-volume relationship:
+  `earthfill` or `earthfill_clay_core_rockfill`.
+- `V_out_m3` is `V_out`, the volume of water passing through the breach, in m³.
+- `h_w_m` is `h_w`, the water depth above the breach bottom, in m.
+- `Vw_m3` is `Vw`, the reservoir volume at failure, in m³.
+- `hw_m` is `hw`, the water depth used by the peak-discharge relationship, in m.
+- `crest_width_C_m` is `C`, the dam crest width, in m.
+- `upstream_slope_Z1` is `Z1`, the upstream dam slope ratio, dimensionless.
+- `downstream_slope_Z2` is `Z2`, the downstream dam slope ratio, dimensionless.
+- `peak_discharge_relationship` selects the MacDonald peak relationship.
+  `best_fit` is the project default; `envelope` is an explicit alternative.
+
+All numeric MacDonald inputs are strictly positive. No field is inferred from
+`FailureSource.storage_volume_m3`, `initial_water_level_m`, or
+`breach_depth_m`. `FailureSource.storage_volume_m3` remains a general source
+storage value and is not redefined as `Vw` or `V_out`.
+
+When `breach.method != "macdonald_langridge_monopolis"`, `macdonald_inputs`
+must be `null` or omitted only where the containing schema permits omission;
+it must not affect Froehlich calculations.
+
+The approved MacDonald formation-time relationship applies only to the
+earthfill formulation. No clay-core/rockfill formation-time relationship is
+defined. Therefore, a clay-core/rockfill request must remain a structured
+insufficient-input condition until an approved formation-time relationship or
+user-supplied contract result is available. `formation_time_hr` remains
+mandatory in `BreachParameters`.
+
+`severity_index` is an abstract normalized index. It is **not** a statement
+that a percentage of dam height failed. For slider scenarios,
+`severity_index = severity_level_0_10 * 10`. Exact scenarios may use `null`
+unless they match an approved site-specific scenario catalog entry.
 
 `scenario_id` is stable and content-addressed from the canonical scenario fields; `generated_at` is **not** part of the hash.
 
@@ -792,13 +860,19 @@ Error example:
 ScenarioBundle {
   schema_version
   scenario: PhysicalScenario
-  discharge_series: DischargeSeries
+  discharge_series: DischargeSeries | null
 }
 ```
 
 Rules:
 
-- `scenario.discharge_series_id == discharge_series.series_id`.
+- when `discharge_series` is non-null,
+  `scenario.discharge_series_id == discharge_series.series_id`
+- when `discharge_series` is null, `scenario.discharge_series_id` must be null
+- M2 must not invent a hydrograph shape; solver-side forcing requires an
+  explicitly defined M3/M4 contract
+- `series_id` is canonical; `hydrograph_id` is accepted only for legacy
+  compatibility fixtures and is not a canonical M2 output field
     
 - If Module 2 computes both breach formulas, it sends one `ScenarioBundle` per selected method/scenario.
     
@@ -855,7 +929,9 @@ Rules:
     
 - `exact_values` → `exact_values` object required; `severity_level_0_10=null`.
     
-- Module 2 owns the mapping from exact physical values to the normalized `severity_index`.
+- Exact physical values do not receive a mathematical `severity_index`.
+  A non-null value is allowed only when Module 2 resolves an approved
+  site-specific scenario catalog entry.
     
 - If insufficient values are provided for the selected failure-source type, return `insufficient_exact_inputs` with `details.required_fields`.
     

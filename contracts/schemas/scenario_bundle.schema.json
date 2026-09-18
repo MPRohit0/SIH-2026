@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sih26161.org/scenario_bundle.schema.json",
+  "title": "Scenario Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "scenario": {
+      "$ref": "https://schemas.sih26161.org/physical_scenario.schema.json"
+    },
+    "discharge_series": {
+      "anyOf": [
+        {"$ref": "https://schemas.sih26161.org/hydrograph.schema.json"},
+        {"type": "null"}
+      ]
+    }
+  },
+  "required": ["schema_version", "scenario", "discharge_series"]
+}

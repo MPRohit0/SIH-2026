@@ -3,16 +3,61 @@
   "$id": "https://schemas.sih26161.org/breach_parameters.schema.json",
   "title": "Breach Parameters",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
-    "id": {
-      "type": "string"
+    "breach_width_m": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 500
     },
-    "created_at": {
+    "breach_depth_m": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "formation_time_hr": {
+      "type": "number",
+      "minimum": 0.05,
+      "maximum": 48
+    },
+    "peak_discharge_m3s": {
+      "type": ["number", "null"],
+      "exclusiveMinimum": 0,
+      "maximum": 100000
+    },
+    "method": {
       "type": "string",
-      "format": "date-time"
+      "enum": ["froehlich", "macdonald_langridge_monopolis"]
+    },
+    "peak_discharge_provenance": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "froehlich_2008",
+            "macdonald_langridge_monopolis",
+            "user_supplied",
+            "hydraulic_solver",
+            "unavailable"
+          ]
+        },
+        "method_version": {
+          "type": ["string", "null"]
+        },
+        "input_basis": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["source", "method_version", "input_basis"]
     }
   },
   "required": [
-    "id"
+    "breach_width_m",
+    "breach_depth_m",
+    "formation_time_hr",
+    "peak_discharge_m3s",
+    "method",
+    "peak_discharge_provenance"
   ]
 }

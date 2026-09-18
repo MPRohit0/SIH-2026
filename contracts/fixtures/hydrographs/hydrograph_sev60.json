@@ -1,5 +1,12 @@
 {
-  "id": "hg-sev60",
-  "peak_discharge_m3s": 14200.0,
-  "time_to_peak_hr": 2.2
+  "schema_version": "1.0.0",
+  "series_id": "hydro_demo_s60_froehlich",
+  "points": [
+    {"t_min": 0, "discharge_m3s": 0.0},
+    {"t_min": 15, "discharge_m3s": 4200.0},
+    {"t_min": 30, "discharge_m3s": 9400.0},
+    {"t_min": 60, "discharge_m3s": 5100.0},
+    {"t_min": 120, "discharge_m3s": 800.0},
+    {"t_min": 180, "discharge_m3s": 250.0}
+  ]
 }

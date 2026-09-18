@@ -1,59 +1,55 @@
-"""Home Page for SIH26161 Flood Simulation Framework (Module 8 Dashboard)."""
+"""Home page for the SIH26161 dashboard demo."""
 
 from __future__ import annotations
 
 import streamlit as st
 
-try:
-    from modules.m8_dashboard.components.map import render_river_map
-    from modules.m8_dashboard.components.metrics import render_dashboard_metrics
-    from modules.m8_dashboard.services.river_store import load_rivers
-except ModuleNotFoundError:
-    from components.map import render_river_map
-    from components.metrics import render_dashboard_metrics
-    from services.river_store import load_rivers
+from services.api_client import get_sites_response
 
 
 def render_home_page() -> None:
-    """Render the Home overview page."""
-    st.title("🌊 SIH26161 Flood Simulation Framework")
-    st.caption("Multi-fidelity hydrodynamic flood and dam-breach digital twin platform")
-
+    st.title("SIH26161")
+    st.caption("Flood simulation and dam-breach decision support for monitored sites")
     st.markdown(
-        """
-        Welcome to the **SIH26161 Simulation Control Center**. This framework provides an end-to-end 
-        modelling pipeline for dam failures, glacial lake outburst floods (GLOFs), and landslide damming events 
-        across complex river terrains.
-        """
+        "Monitor site readiness, open a site, and move to site onboarding from a single local dashboard."
     )
 
-    st.markdown("---")
+    st.page_link("pages/2_Add_Site.py", label="Add Site", icon="➕")
 
-    # 1. Metric Cards
-    render_dashboard_metrics()
+    response = get_sites_response()
+    sites = response.get("sites", [])
 
-    st.markdown("---")
+    if not sites:
+        st.info("No sites available from the mock /sites response.")
+        return
 
-    # 2. Map Section
-    st.subheader("🗺️ River Network & Spatial Overview")
-    st.write("Visualizing all locally registered river centerlines across the monitoring domain.")
+    st.subheader("Available sites")
+    for site in sites:
+        name = site.get("name", site.get("site_id", "Unnamed site"))
+        site_id = site.get("site_id", "unknown")
+        location = site.get("location", {})
+        lon = location.get("lon")
+        lat = location.get("lat")
+        bbox = location.get("bbox_wgs84", [])
+        status = site.get("status", "unknown")
+        readiness = site.get("readiness", "unknown")
 
-    rivers = load_rivers()
+        with st.container():
+            st.markdown(f"### {name}")
+            st.write(f"Site ID: {site_id}")
+            if lon is not None and lat is not None:
+                st.write(f"Location: ({lon}, {lat})")
+            if bbox:
+                st.write(f"Bounding box: {bbox}")
+            st.write(f"Status: {status}")
+            st.write(f"Readiness: {readiness}")
 
-    if rivers:
-        st.info(f"Loaded **{len(rivers)}** saved river(s) from `data/rivers/rivers.geojson`.")
-    else:
-        st.warning("No rivers registered yet. Navigate to **Add River** in the sidebar to trace your first river centerline.")
+            if st.button(f"Open {site_id}", key=f"open_{site_id}"):
+                st.session_state["selected_site_id"] = site_id
+                st.success(f"Opened site {site_id}")
 
-    # Render base folium map with all saved rivers
-    render_river_map(
-        rivers=rivers,
-        enable_drawing=False,
-        height=520,
-        key="home_river_map",
-        auto_fit=bool(rivers),
-    )
+            st.markdown("---")
 
 
-# If executed directly
-render_home_page()
+if __name__ == "__main__":
+    render_home_page()

@@ -1,49 +1,31 @@
-# Module 8: Operations & Visualization Dashboard (`m8_dashboard`)
+# Module 8 dashboard skeleton
 
-## Purpose
-Provides the primary user interface for the SIH26161 framework. Enables operators to inspect the river network, trace and register new river centerlines on an interactive map, view scenario metrics, and manage geospatial assets.
+This module is intentionally a local-only Streamlit shell for the SIH26161 dashboard. It is not a production deployment layer, not a real database client, and not a simulation engine.
 
-## Current Implementation Status
-- **Status:** Fully functional basic dashboard and river management engine.
-- **Implemented:**
-  - **Multi-page Navigation:** Home, Add River, and Rivers registry.
-  - **Home Dashboard (`pages/1_Home.py`):** System overview, 3 metric cards (Rivers, Sites, Scenarios), interactive India map.
-  - **Add River (`pages/2_Add_River.py`):** Interactive Leaflet.Draw polyline centerline tracing, input validation, and local GeoJSON persistence.
-  - **Rivers Registry (`pages/3_Rivers.py`):** River listing, map inspection with highlight zoom, safe deletion with two-step confirmation, and GeoJSON export.
-  - **Local Persistence (`services/river_store.py`):** Stores rivers in `data/rivers/rivers.geojson` as valid GeoJSON `FeatureCollection`.
-  - **Test Suite (`tests/`):** 14 unit tests covering persistence, validation, GeoJSON compliance, and import integrity.
+## Scope
+- Local-only user interface
+- No authentication
+- No cloud deployment
+- No direct database access from the UI
+- Requests go through the M0/API boundary only
+- Mock responses are used until the backend is implemented
 
-## Inputs
-- User form inputs (River Name, River ID).
-- Drawn vector geometries from Folium map interface.
-- Contract fixtures and mock data from `contracts/fixtures/` and `data/mock/`.
+## Structure
+- `app.py`: dashboard entry point
+- `pages/1_Home.py`: overview landing page
+- `pages/2_Add_Site.py`: mock site intake form
+- `pages/3_Site_Dashboard.py`: scenario and impact dashboard shell
+- `components/map.py`: map display helper
+- `components/metrics.py`: metric card helper
+- `components/site_form.py`: form builder for site onboarding and scenario resolution
+- `services/api_client.py`: local mock API client that reads JSON fixtures under `data/mock/json/`
 
-## Outputs
-- Updated `data/rivers/rivers.geojson` with registered `LineString` features.
-- Interactive cartographic visualization layers.
-
-## Relevant Contract Schemas
-- `contracts/schemas/domain.schema.json`
-- `contracts/schemas/artifact.schema.json`
-
-## Dependencies
-- `streamlit>=1.36.0`
-- `folium>=0.16.0`
-- `streamlit-folium>=0.20.0`
-- `branca>=0.7.0`
-
-## How to Run
-From the repository root:
+## Run locally
 ```bash
 streamlit run modules/m8_dashboard/app.py
 ```
-The application will open in your default browser at `http://localhost:8501`.
 
-## How to Test
-Execute unit tests without launching the Streamlit server:
-```bash
-pytest modules/m8_dashboard/tests -v
-```
-
-## Known Limitations
-- Initial version supports centerline registration and spatial inspection; hydraulic boundary parameter assignment (inflow hydrographs, bathymetric roughness) will be linked via M1/M2 integrations.
+## Notes
+- The UI communicates through mocked M0 responses only.
+- No real solver, impact, or satellite logic is implemented here.
+- This shell intentionally relies on the existing mock fixtures already present in the repo.

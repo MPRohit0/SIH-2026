@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "scenario_id": "scenario-macdonald-inputs",
+  "site_id": "site-01",
+  "failure_source_id": "source-01",
+  "severity_index": null,
+  "severity_level_0_10": null,
+  "initial_conditions": {
+    "initial_water_level_m": 2470.0,
+    "downstream_discharge_m3s": 850.0
+  },
+  "breach": {
+    "breach_width_m": 45.2,
+    "breach_depth_m": 18.6,
+    "formation_time_hr": 0.8,
+    "peak_discharge_m3s": null,
+    "method": "macdonald_langridge_monopolis",
+    "peak_discharge_provenance": {
+      "source": "unavailable",
+      "method_version": "macdonald_1984_best_fit",
+      "input_basis": "contract input preflight fixture"
+    }
+  },
+  "macdonald_inputs": {
+    "material_classification": "earthfill",
+    "V_out_m3": 250000.0,
+    "h_w_m": 12.0,
+    "Vw_m3": 1200000.0,
+    "hw_m": 15.0,
+    "crest_width_C_m": 8.0,
+    "upstream_slope_Z1": 2.5,
+    "downstream_slope_Z2": 2.0,
+    "peak_discharge_relationship": "best_fit"
+  },
+  "discharge_series_id": null,
+  "breach_engine_version": "contract-fixture",
+  "generated_at": "2026-09-19T00:00:00Z"
+}

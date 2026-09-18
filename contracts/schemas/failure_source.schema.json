@@ -3,16 +3,50 @@
   "$id": "https://schemas.sih26161.org/failure_source.schema.json",
   "title": "Failure Source",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
-    "id": {
-      "type": "string"
-    },
-    "created_at": {
+    "failure_source_id": {"type": "string", "minLength": 1},
+    "type": {
       "type": "string",
-      "format": "date-time"
-    }
+      "enum": ["engineered_dam", "natural_lake_glof", "landslide_dam"]
+    },
+    "name": {"type": "string", "minLength": 1},
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lon": {"type": "number", "minimum": -180, "maximum": 180},
+        "lat": {"type": "number", "minimum": -90, "maximum": 90}
+      },
+      "required": ["lon", "lat"]
+    },
+    "height_m": {
+      "type": ["number", "null"],
+      "exclusiveMinimum": 0
+    },
+    "storage_volume_m3": {
+      "type": ["number", "null"],
+      "exclusiveMinimum": 0
+    },
+    "catchment_area_km2": {
+      "type": ["number", "null"],
+      "exclusiveMinimum": 0
+    },
+    "data_source": {"type": ["string", "null"]}
   },
   "required": [
-    "id"
+    "failure_source_id",
+    "type",
+    "name",
+    "location",
+    "height_m",
+    "storage_volume_m3",
+    "catchment_area_km2",
+    "data_source"
+  ],
+  "anyOf": [
+    {"required": ["height_m"], "properties": {"height_m": {"type": "number"}}},
+    {"required": ["storage_volume_m3"], "properties": {"storage_volume_m3": {"type": "number"}}},
+    {"required": ["catchment_area_km2"], "properties": {"catchment_area_km2": {"type": "number"}}}
   ]
 }

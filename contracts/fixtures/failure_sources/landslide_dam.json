@@ -1,5 +1,13 @@
 {
-  "id": "src-landslide-001",
+  "failure_source_id": "src-landslide-001",
   "type": "landslide_dam",
-  "debris_volume_m3": 8500000
+  "name": "Reference landslide dam",
+  "location": {
+    "lon": 84.2,
+    "lat": 28.1
+  },
+  "height_m": null,
+  "storage_volume_m3": 8500000,
+  "catchment_area_km2": null,
+  "data_source": "contract-fixture"
 }

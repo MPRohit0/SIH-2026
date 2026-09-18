@@ -1,209 +1,194 @@
-"""Reusable Map Component for SIH26161 Module 8 Dashboard.
-
-Creates Folium maps, renders river vector layers, manages polyline drawing,
-and handles spatial bounding box auto-fitting.
-"""
+"""Local map components for site and flood-result visualization."""
 
 from __future__ import annotations
 
-from typing import Any
+import json
+from pathlib import Path
+from typing import Any, Mapping, Sequence
+
 import folium
-from folium.plugins import Draw, Fullscreen
 from streamlit_folium import st_folium
 
-INDIA_CENTER = [20.5937, 78.9629]
-DEFAULT_ZOOM = 5
+REPO_ROOT = Path(__file__).resolve().parents[3]
+MOCK_ARTIFACT_ROOT = REPO_ROOT / "data" / "mock" / "artifacts"
 
 
-def create_base_map(
-    center: list[float] | tuple[float, float] = INDIA_CENTER,
-    zoom: int = DEFAULT_ZOOM,
-) -> folium.Map:
-    """Create a clean base Folium map centered on India."""
-    m = folium.Map(
-        location=list(center),
-        zoom_start=zoom,
-        tiles="OpenStreetMap",
-        control_scale=True,
-    )
-    Fullscreen(position="topright").add_to(m)
-    return m
-
-
-def compute_rivers_bounds(rivers: list[dict[str, Any]]) -> list[list[float]] | None:
-    """Compute [[min_lat, min_lon], [max_lat, max_lon]] across all river coordinates."""
-    lats: list[float] = []
-    lons: list[float] = []
-
-    for feature in rivers:
-        geom = feature.get("geometry", {})
-        coords = geom.get("coordinates", [])
-        for pt in coords:
-            if isinstance(pt, (list, tuple)) and len(pt) >= 2:
-                try:
-                    lon, lat = float(pt[0]), float(pt[1])
-                    lons.append(lon)
-                    lats.append(lat)
-                except (ValueError, TypeError):
-                    continue
-
-    if not lats or not lons:
+def _mock_artifact_path(url: str | None) -> Path | None:
+    """Resolve a mock URL without exposing a filesystem path to the UI."""
+    if not url or not url.startswith("/mock-api/artifacts/"):
         return None
-
-    min_lat, max_lat = min(lats), max(lats)
-    min_lon, max_lon = min(lons), max(lons)
-
-    # If all points are identical, add a small buffer
-    if min_lat == max_lat:
-        min_lat -= 0.05
-        max_lat += 0.05
-    if min_lon == max_lon:
-        min_lon -= 0.05
-        max_lon += 0.05
-
-    return [[min_lat, min_lon], [max_lat, max_lon]]
-
-
-def add_rivers_to_map(
-    folium_map: folium.Map,
-    rivers: list[dict[str, Any]],
-    highlight_id: str | None = None,
-) -> folium.Map:
-    """Render saved river features as styled GeoJson vector lines."""
-    for feature in rivers:
-        props = feature.get("properties", {})
-        river_id = props.get("river_id", "unknown")
-        river_name = props.get("river_name", "Unnamed River")
-        source = props.get("source", "manual")
-        created_at = props.get("created_at", "N/A")
-        coords = feature.get("geometry", {}).get("coordinates", [])
-        pt_count = len(coords)
-
-        is_highlighted = highlight_id is not None and river_id == highlight_id
-        color = "#E53935" if is_highlighted else "#1E88E5"
-        weight = 6 if is_highlighted else 4
-        opacity = 1.0 if is_highlighted else 0.85
-
-        popup_html = f"""
-        <div style="font-family: sans-serif; font-size: 13px; min-width: 180px;">
-            <b style="color: {color}; font-size: 14px;">{river_name}</b><br/>
-            <hr style="margin: 4px 0;"/>
-            <b>ID:</b> <code>{river_id}</code><br/>
-            <b>Source:</b> {source}<br/>
-            <b>Points:</b> {pt_count}<br/>
-            <b>Created:</b> {created_at[:10] if len(created_at) >= 10 else created_at}
-        </div>
-        """
-
-        folium.GeoJson(
-            feature,
-            name=f"{river_name} ({river_id})",
-            style_function=lambda _, c=color, w=weight, o=opacity: {
-                "color": c,
-                "weight": w,
-                "opacity": o,
-            },
-            tooltip=folium.Tooltip(f"🌊 {river_name} ({river_id})"),
-            popup=folium.Popup(popup_html, max_width=250),
-        ).add_to(folium_map)
-
-    return folium_map
-
-
-def fit_map_to_rivers(
-    folium_map: folium.Map,
-    rivers: list[dict[str, Any]],
-    highlight_id: str | None = None,
-) -> folium.Map:
-    """Auto-fit folium map viewport to rivers bounding box."""
-    target_rivers = rivers
-    if highlight_id:
-        highlighted = [r for r in rivers if r.get("properties", {}).get("river_id") == highlight_id]
-        if highlighted:
-            target_rivers = highlighted
-
-    bounds = compute_rivers_bounds(target_rivers)
-    if bounds:
-        folium_map.fit_bounds(bounds, padding=(30, 30))
-    return folium_map
-
-
-def extract_drawn_linestring(st_folium_output: dict[str, Any] | None) -> dict[str, Any] | None:
-    """Extract a valid LineString geometry dictionary from streamlit-folium output."""
-    if not st_folium_output or not isinstance(st_folium_output, dict):
+    relative_path = url.removeprefix("/mock-api/artifacts/")
+    candidate = (MOCK_ARTIFACT_ROOT / relative_path).resolve()
+    if MOCK_ARTIFACT_ROOT not in candidate.parents:
         return None
-
-    # Check last_active_drawing
-    last = st_folium_output.get("last_active_drawing")
-    if last and isinstance(last, dict):
-        geom = last.get("geometry")
-        if isinstance(geom, dict) and geom.get("type") == "LineString":
-            coords = geom.get("coordinates", [])
-            if isinstance(coords, list) and len(coords) >= 2:
-                return geom
-
-    # Check all_drawings list in reverse order
-    all_drawings = st_folium_output.get("all_drawings")
-    if isinstance(all_drawings, list):
-        for item in reversed(all_drawings):
-            if isinstance(item, dict):
-                geom = item.get("geometry")
-                if isinstance(geom, dict) and geom.get("type") == "LineString":
-                    coords = geom.get("coordinates", [])
-                    if isinstance(coords, list) and len(coords) >= 2:
-                        return geom
-
-    return None
+    return candidate
 
 
-def render_river_map(
-    rivers: list[dict[str, Any]] | None = None,
-    enable_drawing: bool = False,
-    highlight_id: str | None = None,
-    height: int = 500,
-    center: list[float] | tuple[float, float] = INDIA_CENTER,
-    zoom: int = DEFAULT_ZOOM,
-    auto_fit: bool = True,
-    key: str = "river_map",
+def _read_geojson_artifact(artifact: Mapping[str, Any] | None) -> dict[str, Any] | None:
+    if not artifact or artifact.get("kind") != "vector":
+        return None
+    path = _mock_artifact_path(artifact.get("url"))
+    if path is None or not path.is_file():
+        return None
+    with path.open("r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def _center_from_bbox(bbox: Sequence[float]) -> tuple[float, float]:
+    return ((bbox[1] + bbox[3]) / 2.0, (bbox[0] + bbox[2]) / 2.0)
+
+
+def render_site_map(bbox_wgs84: Sequence[float] | None = None) -> None:
+    """Render a simple site context map."""
+    bbox = bbox_wgs84 or [79.72, 30.5, 79.9, 30.65]
+    latitude, longitude = _center_from_bbox(bbox)
+    st.map([
+        {"lat": latitude, "lon": longitude},
+        {"lat": bbox[1], "lon": bbox[0]},
+        {"lat": bbox[3], "lon": bbox[2]},
+    ])
+
+
+def render_flood_result_map(
+    *,
+    site_location: Mapping[str, float],
+    site_bbox_wgs84: Sequence[float] | None,
+    flood_result: Mapping[str, Any],
+    height: int = 560,
 ) -> dict[str, Any] | None:
-    """Build and render an interactive river map in Streamlit using streamlit-folium.
+    """Render only geographic products supplied by a FloodQueryResponse."""
+    bbox = site_bbox_wgs84 or [79.72, 30.5, 79.9, 30.65]
+    center = _center_from_bbox(bbox)
+    flood_map = folium.Map(location=center, zoom_start=11, tiles="OpenStreetMap")
 
-    Returns the output dictionary from st_folium.
-    """
-    m = create_base_map(center=center, zoom=zoom)
+    site_lat = site_location.get("lat")
+    site_lon = site_location.get("lon")
+    if site_lat is not None and site_lon is not None:
+        folium.Marker(
+            [site_lat, site_lon],
+            tooltip="Failure source",
+            popup=f"Failure location: {site_lon}, {site_lat}",
+            icon=folium.Icon(color="red", icon="warning-sign"),
+        ).add_to(flood_map)
 
-    river_list = rivers or []
-    if river_list:
-        add_rivers_to_map(m, river_list, highlight_id=highlight_id)
-        if auto_fit:
-            fit_map_to_rivers(m, river_list, highlight_id=highlight_id)
+    folium.Rectangle(
+        bounds=[[bbox[1], bbox[0]], [bbox[3], bbox[2]]],
+        tooltip="Site/domain bounding box",
+        color="#555555",
+        fill=False,
+    ).add_to(flood_map)
 
-    if enable_drawing:
-        Draw(
-            export=False,
-            position="topleft",
-            draw_options={
-                "polyline": {
-                    "shapeOptions": {
-                        "color": "#1E88E5",
-                        "weight": 5,
-                        "opacity": 0.9,
-                    }
-                },
-                "polygon": False,
-                "rectangle": False,
-                "circle": False,
-                "marker": False,
-                "circlemarker": False,
+    extent = _read_geojson_artifact(flood_result.get("max_extent"))
+    if extent is not None:
+        folium.GeoJson(
+            extent,
+            name="Simulated maximum flood extent",
+            style_function=lambda _: {
+                "color": "#1565c0",
+                "fillColor": "#42a5f5",
+                "fillOpacity": 0.35,
+                "weight": 2,
             },
-            edit_options={"edit": False, "remove": True},
-        ).add_to(m)
+            tooltip="Simulated maximum flood extent",
+        ).add_to(flood_map)
 
-    output = st_folium(
-        m,
-        height=height,
-        use_container_width=True,
-        key=key,
-        returned_objects=["last_active_drawing", "all_drawings"] if enable_drawing else [],
+    depth = flood_result.get("timesteps", [{}])[-1].get("depth")
+    max_depth = flood_result.get("max_depth_m")
+    depth_label = f"Maximum flood depth: {max_depth} m" if max_depth is not None else "Maximum flood depth unavailable"
+    if depth and depth.get("available"):
+        folium.Marker(
+            center,
+            tooltip="Flood depth information",
+            popup=f"{depth_label}<br>Raster artifact: {depth.get('artifact_id')}",
+            icon=folium.Icon(color="blue", icon="tint"),
+        ).add_to(flood_map)
+
+    layers = {
+        "Velocity raster": flood_result.get("timesteps", [{}])[-1].get("velocity"),
+        "Arrival-time raster": flood_result.get("arrival_time"),
+    }
+    for label, artifact in layers.items():
+        if artifact and artifact.get("available"):
+            folium.Marker(
+                center,
+                tooltip=label,
+                popup=f"{label}<br>Raster artifact: {artifact.get('artifact_id')}",
+                icon=folium.Icon(color="cadetblue", icon="info-sign"),
+            ).add_to(flood_map)
+
+    folium.LayerControl().add_to(flood_map)
+    return st_folium(flood_map, height=height, use_container_width=True)
+
+
+def render_historical_validation_map(
+    *,
+    site_location: Mapping[str, float],
+    site_bbox_wgs84: Sequence[float] | None,
+    historical_result: Mapping[str, Any],
+    flood_result: Mapping[str, Any] | None = None,
+    height: int = 560,
+) -> dict[str, Any] | None:
+    """Render observed historical products and an available simulated extent."""
+    bbox = site_bbox_wgs84 or [79.72, 30.5, 79.9, 30.65]
+    validation_map = folium.Map(location=_center_from_bbox(bbox), zoom_start=11)
+
+    site_lat = site_location.get("lat")
+    site_lon = site_location.get("lon")
+    if site_lat is not None and site_lon is not None:
+        folium.Marker(
+            [site_lat, site_lon],
+            tooltip="Failure source",
+            icon=folium.Icon(color="red", icon="warning-sign"),
+        ).add_to(validation_map)
+
+    observations = historical_result.get("observations", {})
+    observed_extent = _read_geojson_artifact(observations.get("extent"))
+    if observed_extent is not None:
+        folium.GeoJson(
+            observed_extent,
+            name="Observed historical extent",
+            style_function=lambda _: {
+                "color": "#2e7d32",
+                "fillColor": "#66bb6a",
+                "fillOpacity": 0.35,
+                "weight": 2,
+            },
+            tooltip="Observed historical extent",
+        ).add_to(validation_map)
+
+    if flood_result:
+        simulated_extent = _read_geojson_artifact(flood_result.get("max_extent"))
+        if simulated_extent is not None:
+            folium.GeoJson(
+                simulated_extent,
+                name="Simulated flood extent",
+                style_function=lambda _: {
+                    "color": "#1565c0",
+                    "fillColor": "#42a5f5",
+                    "fillOpacity": 0.25,
+                    "weight": 2,
+                },
+                tooltip="Simulated flood extent",
+            ).add_to(validation_map)
+
+    point_groups = (
+        ("Observed arrival time", observations.get("arrival_time_points", []), "orange", "arrival_time_min"),
+        ("Observed depth", observations.get("depth_points", []), "blue", "depth_m"),
+        ("Observed velocity", observations.get("velocity_points", []), "purple", "velocity_ms"),
     )
-    return output
+    for label, points, color, value_key in point_groups:
+        for point in points or []:
+            location = point.get("location", {})
+            if location.get("lat") is None or location.get("lon") is None:
+                continue
+            folium.CircleMarker(
+                [location["lat"], location["lon"]],
+                radius=5,
+                color=color,
+                fill=True,
+                tooltip=label,
+                popup=f"{label}: {point.get(value_key)}",
+            ).add_to(validation_map)
+
+    folium.LayerControl().add_to(validation_map)
+    return st_folium(validation_map, height=height, use_container_width=True)
