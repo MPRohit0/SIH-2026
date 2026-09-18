@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "sph",
+        "t_min": 60
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.75,
+              30.545
+            ],
+            [
+              79.87,
+              30.545
+            ],
+            [
+              79.88,
+              30.635
+            ],
+            [
+              79.82,
+              30.65
+            ],
+            [
+              79.74,
+              30.62
+            ],
+            [
+              79.75,
+              30.545
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

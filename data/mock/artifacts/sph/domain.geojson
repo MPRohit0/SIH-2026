@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "mock_domain",
+        "domain": "near_field"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.76,
+              30.55
+            ],
+            [
+              79.86,
+              30.55
+            ],
+            [
+              79.86,
+              30.63
+            ],
+            [
+              79.76,
+              30.63
+            ],
+            [
+              79.76,
+              30.55
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

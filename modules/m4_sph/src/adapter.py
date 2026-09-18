@@ -1,0 +1,1 @@
+"""DualSPHysics module: adapter.py."""

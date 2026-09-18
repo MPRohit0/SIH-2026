@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "mock_terrain",
+        "id": "xs01"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.77,
+            30.545
+          ],
+          [
+            79.79,
+            30.555
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "mock_terrain",
+        "id": "xs02"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.81,
+            30.585
+          ],
+          [
+            79.83,
+            30.595
+          ]
+        ]
+      }
+    }
+  ]
+}

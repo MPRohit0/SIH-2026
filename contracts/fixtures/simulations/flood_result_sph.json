@@ -1,0 +1,6 @@
+{
+  "id": "sim-sph-001",
+  "solver": "dualsphysics",
+  "max_depth_m": 15.2,
+  "peak_velocity_ms": 8.1
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "file": "00_failure_source.json",
+    "relative_path": "json/00_failure_source.json"
+  },
+  {
+    "file": "00_mock_route_map.json",
+    "relative_path": "json/00_mock_route_map.json"
+  },
+  {
+    "file": "01_terrain_manifest.json",
+    "relative_path": "json/01_terrain_manifest.json"
+  },
+  {
+    "file": "02_physical_scenario_s60.json",
+    "relative_path": "json/02_physical_scenario_s60.json"
+  },
+  {
+    "file": "03_hydrograph_s60.json",
+    "relative_path": "json/03_hydrograph_s60.json"
+  },
+  {
+    "file": "04_scenario_bundle_s60.json",
+    "relative_path": "json/04_scenario_bundle_s60.json"
+  },
+  {
+    "file": "05_flood_simulation_result_delft3d.json",
+    "relative_path": "json/05_flood_simulation_result_delft3d.json"
+  },
+  {
+    "file": "06_flood_simulation_result_sph.json",
+    "relative_path": "json/06_flood_simulation_result_sph.json"
+  },
+  {
+    "file": "07_validation_result_delft3d.json",
+    "relative_path": "json/07_validation_result_delft3d.json"
+  },
+  {
+    "file": "08_validation_result_sph.json",
+    "relative_path": "json/08_validation_result_sph.json"
+  },
+  {
+    "file": "09_confidence_result.json",
+    "relative_path": "json/09_confidence_result.json"
+  },
+  {
+    "file": "10_scenario_resolve_request_slider.json",
+    "relative_path": "json/10_scenario_resolve_request_slider.json"
+  },
+  {
+    "file": "11_scenario_resolve_request_exact.json",
+    "relative_path": "json/11_scenario_resolve_request_exact.json"
+  },
+  {
+    "file": "12_scenario_resolution_response_exact.json",
+    "relative_path": "json/12_scenario_resolution_response_exact.json"
+  },
+  {
+    "file": "12b_scenario_resolution_response_slider.json",
+    "relative_path": "json/12b_scenario_resolution_response_slider.json"
+  },
+  {
+    "file": "13_scenario_onboarding_request.json",
+    "relative_path": "json/13_scenario_onboarding_request.json"
+  },
+  {
+    "file": "14_job_status_running.json",
+    "relative_path": "json/14_job_status_running.json"
+  },
+  {
+    "file": "15_job_status_succeeded.json",
+    "relative_path": "json/15_job_status_succeeded.json"
+  },
+  {
+    "file": "16_flood_query_response_both.json",
+    "relative_path": "json/16_flood_query_response_both.json"
+  },
+  {
+    "file": "17_flood_query_response_partial.json",
+    "relative_path": "json/17_flood_query_response_partial.json"
+  },
+  {
+    "file": "18_impact_result.json",
+    "relative_path": "json/18_impact_result.json"
+  },
+  {
+    "file": "19_satellite_overlay_live.json",
+    "relative_path": "json/19_satellite_overlay_live.json"
+  },
+  {
+    "file": "20_satellite_overlay_fallback.json",
+    "relative_path": "json/20_satellite_overlay_fallback.json"
+  },
+  {
+    "file": "21_historical_observation_bundle.json",
+    "relative_path": "json/21_historical_observation_bundle.json"
+  },
+  {
+    "file": "22_historical_validation_result.json",
+    "relative_path": "json/22_historical_validation_result.json"
+  },
+  {
+    "file": "23_historical_validation_response.json",
+    "relative_path": "json/23_historical_validation_response.json"
+  },
+  {
+    "file": "24_error_response_scenario_not_ready.json",
+    "relative_path": "json/24_error_response_scenario_not_ready.json"
+  },
+  {
+    "file": "25_impact_result_partial.json",
+    "relative_path": "json/25_impact_result_partial.json"
+  }
+]

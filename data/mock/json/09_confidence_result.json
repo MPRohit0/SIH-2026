@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "confidence_formula_version": "confidence-v1",
+  "validation_profile_id": "validation_profile_demo_v1",
+  "overall": "HIGH",
+  "flood_extent": "HIGH",
+  "flood_depth": "HIGH",
+  "arrival_time": "MODERATE",
+  "velocity": "HIGH"
+}

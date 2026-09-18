@@ -1,0 +1,6 @@
+{
+  "id": "val-interp-001",
+  "rmse": 0.28,
+  "r2_score": 0.96,
+  "csi_score": 0.89
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "validation_id": "val_sph_holdout_s60",
+  "validation_profile_id": "validation_profile_demo_v1",
+  "confidence_formula_version": "confidence-v1",
+  "held_out_scenario_id": "demo_dam_s60_froehlich_v1",
+  "model": "sph",
+  "interpolation_method": "linear_severity_1d",
+  "source_neighbors": [
+    {
+      "scenario_id": "demo_dam_s40_froehlich_v1",
+      "severity_index": 40,
+      "weight": 0.5
+    },
+    {
+      "scenario_id": "demo_dam_s80_froehlich_v1",
+      "severity_index": 80,
+      "weight": 0.5
+    }
+  ],
+  "metrics": {
+    "flood_extent_iou": 0.86,
+    "relative_area_error_pct": 5.4,
+    "flood_depth_mae_m": 0.41,
+    "arrival_time_mae_min": 4.8,
+    "velocity_mae_ms": 0.33
+  },
+  "metric_availability": {
+    "flood_extent_iou": "computed",
+    "relative_area_error_pct": "computed",
+    "flood_depth_mae_m": "computed",
+    "arrival_time_mae_min": "computed",
+    "velocity_mae_ms": "computed"
+  },
+  "generated_at": "2026-09-18T17:00:00Z"
+}

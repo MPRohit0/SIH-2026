@@ -1,0 +1,590 @@
+{
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": [],
+  "error": null,
+  "scenario_id": "demo_dam_s60_froehlich_v1",
+  "results": {
+    "sph": {
+      "scenario_id": "demo_dam_s60_froehlich_v1",
+      "interpolation": {
+        "is_interpolated": true,
+        "neighbors": [
+          {
+            "severity_index": 40,
+            "scenario_id": "demo_dam_s40_froehlich_v1",
+            "weight": 0.5
+          },
+          {
+            "severity_index": 80,
+            "scenario_id": "demo_dam_s80_froehlich_v1",
+            "weight": 0.5
+          }
+        ],
+        "interpolation_method": "linear_severity_1d"
+      },
+      "timesteps": [
+        {
+          "t_min": 0,
+          "depth": {
+            "artifact_id": "depth_t0",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/sph/depth_t0.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "depth",
+                  "unit": "m"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-depth_t0",
+            "available": true
+          },
+          "velocity": {
+            "artifact_id": "velocity_t0",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/sph/velocity_t0.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "velocity",
+                  "unit": "m/s"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-velocity_t0",
+            "available": true
+          },
+          "extent": {
+            "artifact_id": "sph_extent_t0",
+            "kind": "vector",
+            "media_type": "application/geo+json",
+            "url": "/mock-api/artifacts/sph/extent_t0.geojson",
+            "crs": "EPSG:4326",
+            "raster_meta": null,
+            "bbox_wgs84": [
+              79.72,
+              30.5,
+              79.9,
+              30.65
+            ],
+            "checksum": "mock-sph_extent_t0",
+            "available": true
+          }
+        },
+        {
+          "t_min": 30,
+          "depth": {
+            "artifact_id": "depth_t30",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/sph/depth_t30.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "depth",
+                  "unit": "m"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-depth_t30",
+            "available": true
+          },
+          "velocity": {
+            "artifact_id": "velocity_t30",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/sph/velocity_t30.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "velocity",
+                  "unit": "m/s"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-velocity_t30",
+            "available": true
+          },
+          "extent": {
+            "artifact_id": "sph_extent_t30",
+            "kind": "vector",
+            "media_type": "application/geo+json",
+            "url": "/mock-api/artifacts/sph/extent_t30.geojson",
+            "crs": "EPSG:4326",
+            "raster_meta": null,
+            "bbox_wgs84": [
+              79.72,
+              30.5,
+              79.9,
+              30.65
+            ],
+            "checksum": "mock-sph_extent_t30",
+            "available": true
+          }
+        },
+        {
+          "t_min": 60,
+          "depth": {
+            "artifact_id": "depth_t60",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/sph/depth_t60.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "depth",
+                  "unit": "m"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-depth_t60",
+            "available": true
+          },
+          "velocity": {
+            "artifact_id": "velocity_t60",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/sph/velocity_t60.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "velocity",
+                  "unit": "m/s"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-velocity_t60",
+            "available": true
+          },
+          "extent": {
+            "artifact_id": "sph_extent_t60",
+            "kind": "vector",
+            "media_type": "application/geo+json",
+            "url": "/mock-api/artifacts/sph/extent_t60.geojson",
+            "crs": "EPSG:4326",
+            "raster_meta": null,
+            "bbox_wgs84": [
+              79.72,
+              30.5,
+              79.9,
+              30.65
+            ],
+            "checksum": "mock-sph_extent_t60",
+            "available": true
+          }
+        }
+      ],
+      "max_extent": {
+        "artifact_id": "sph_max_extent",
+        "kind": "vector",
+        "media_type": "application/geo+json",
+        "url": "/mock-api/artifacts/sph/max_extent.geojson",
+        "crs": "EPSG:4326",
+        "raster_meta": null,
+        "bbox_wgs84": [
+          79.72,
+          30.5,
+          79.9,
+          30.65
+        ],
+        "checksum": "mock-sph_max_extent",
+        "available": true
+      },
+      "arrival_time": {
+        "artifact_id": "arrival_time",
+        "kind": "raster",
+        "media_type": "image/tiff",
+        "url": "/mock-api/artifacts/sph/arrival_time.tif",
+        "crs": "EPSG:32644",
+        "raster_meta": {
+          "dtype": "float32",
+          "bands": [
+            {
+              "name": "arrival_time",
+              "unit": "min"
+            }
+          ],
+          "nodata_value": -9999.0,
+          "pixel_size_m": 30.0
+        },
+        "bbox_wgs84": [
+          79.88455164523661,
+          30.535908493434015,
+          79.8877094213543,
+          30.538641880022094
+        ],
+        "checksum": "mock-arrival_time",
+        "available": true
+      },
+      "peak_discharge_m3s": 9250.0,
+      "max_depth_m": 6.0,
+      "max_velocity_ms": 4.7,
+      "inundated_area_km2": 12.3,
+      "confidence": {
+        "schema_version": "1.0.0",
+        "confidence_formula_version": "confidence-v1",
+        "validation_profile_id": "validation_profile_demo_v1",
+        "overall": "MODERATE",
+        "flood_extent": "MODERATE",
+        "flood_depth": "MODERATE",
+        "arrival_time": "MODERATE",
+        "velocity": "MODERATE"
+      }
+    },
+    "delft3d": {
+      "scenario_id": "demo_dam_s60_froehlich_v1",
+      "interpolation": {
+        "is_interpolated": true,
+        "neighbors": [
+          {
+            "severity_index": 40,
+            "scenario_id": "demo_dam_s40_froehlich_v1",
+            "weight": 0.5
+          },
+          {
+            "severity_index": 80,
+            "scenario_id": "demo_dam_s80_froehlich_v1",
+            "weight": 0.5
+          }
+        ],
+        "interpolation_method": "linear_severity_1d"
+      },
+      "timesteps": [
+        {
+          "t_min": 0,
+          "depth": {
+            "artifact_id": "depth_t0",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/delft3d/depth_t0.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "depth",
+                  "unit": "m"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-depth_t0",
+            "available": true
+          },
+          "velocity": {
+            "artifact_id": "velocity_t0",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/delft3d/velocity_t0.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "velocity",
+                  "unit": "m/s"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-velocity_t0",
+            "available": true
+          },
+          "extent": {
+            "artifact_id": "delft3d_extent_t0",
+            "kind": "vector",
+            "media_type": "application/geo+json",
+            "url": "/mock-api/artifacts/delft3d/extent_t0.geojson",
+            "crs": "EPSG:4326",
+            "raster_meta": null,
+            "bbox_wgs84": [
+              79.72,
+              30.5,
+              79.9,
+              30.65
+            ],
+            "checksum": "mock-delft3d_extent_t0",
+            "available": true
+          }
+        },
+        {
+          "t_min": 30,
+          "depth": {
+            "artifact_id": "depth_t30",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/delft3d/depth_t30.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "depth",
+                  "unit": "m"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-depth_t30",
+            "available": true
+          },
+          "velocity": {
+            "artifact_id": "velocity_t30",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/delft3d/velocity_t30.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "velocity",
+                  "unit": "m/s"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-velocity_t30",
+            "available": true
+          },
+          "extent": {
+            "artifact_id": "delft3d_extent_t30",
+            "kind": "vector",
+            "media_type": "application/geo+json",
+            "url": "/mock-api/artifacts/delft3d/extent_t30.geojson",
+            "crs": "EPSG:4326",
+            "raster_meta": null,
+            "bbox_wgs84": [
+              79.72,
+              30.5,
+              79.9,
+              30.65
+            ],
+            "checksum": "mock-delft3d_extent_t30",
+            "available": true
+          }
+        },
+        {
+          "t_min": 60,
+          "depth": {
+            "artifact_id": "depth_t60",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/delft3d/depth_t60.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "depth",
+                  "unit": "m"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-depth_t60",
+            "available": true
+          },
+          "velocity": {
+            "artifact_id": "velocity_t60",
+            "kind": "raster",
+            "media_type": "image/tiff",
+            "url": "/mock-api/artifacts/delft3d/velocity_t60.tif",
+            "crs": "EPSG:32644",
+            "raster_meta": {
+              "dtype": "float32",
+              "bands": [
+                {
+                  "name": "velocity",
+                  "unit": "m/s"
+                }
+              ],
+              "nodata_value": -9999.0,
+              "pixel_size_m": 30.0
+            },
+            "bbox_wgs84": [
+              79.88455164523661,
+              30.535908493434015,
+              79.8877094213543,
+              30.538641880022094
+            ],
+            "checksum": "mock-velocity_t60",
+            "available": true
+          },
+          "extent": {
+            "artifact_id": "delft3d_extent_t60",
+            "kind": "vector",
+            "media_type": "application/geo+json",
+            "url": "/mock-api/artifacts/delft3d/extent_t60.geojson",
+            "crs": "EPSG:4326",
+            "raster_meta": null,
+            "bbox_wgs84": [
+              79.72,
+              30.5,
+              79.9,
+              30.65
+            ],
+            "checksum": "mock-delft3d_extent_t60",
+            "available": true
+          }
+        }
+      ],
+      "max_extent": {
+        "artifact_id": "delft3d_max_extent",
+        "kind": "vector",
+        "media_type": "application/geo+json",
+        "url": "/mock-api/artifacts/delft3d/max_extent.geojson",
+        "crs": "EPSG:4326",
+        "raster_meta": null,
+        "bbox_wgs84": [
+          79.72,
+          30.5,
+          79.9,
+          30.65
+        ],
+        "checksum": "mock-delft3d_max_extent",
+        "available": true
+      },
+      "arrival_time": {
+        "artifact_id": "arrival_time",
+        "kind": "raster",
+        "media_type": "image/tiff",
+        "url": "/mock-api/artifacts/delft3d/arrival_time.tif",
+        "crs": "EPSG:32644",
+        "raster_meta": {
+          "dtype": "float32",
+          "bands": [
+            {
+              "name": "arrival_time",
+              "unit": "min"
+            }
+          ],
+          "nodata_value": -9999.0,
+          "pixel_size_m": 30.0
+        },
+        "bbox_wgs84": [
+          79.88455164523661,
+          30.535908493434015,
+          79.8877094213543,
+          30.538641880022094
+        ],
+        "checksum": "mock-arrival_time",
+        "available": true
+      },
+      "peak_discharge_m3s": 9400.0,
+      "max_depth_m": 6.2,
+      "max_velocity_ms": 4.8,
+      "inundated_area_km2": 12.7,
+      "confidence": {
+        "schema_version": "1.0.0",
+        "confidence_formula_version": "confidence-v1",
+        "validation_profile_id": "validation_profile_demo_v1",
+        "overall": "HIGH",
+        "flood_extent": "HIGH",
+        "flood_depth": "HIGH",
+        "arrival_time": "MODERATE",
+        "velocity": "HIGH"
+      }
+    }
+  },
+  "queried_at": "2026-09-18T17:05:00Z"
+}

@@ -1,0 +1,107 @@
+# ==============================================================================
+# SIH26161 .gitignore
+# ==============================================================================
+
+# Python bytecode and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+
+# Testing, type checking, and linting caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE and Editor Metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Environment, Secrets, and Credentials (never commit real secrets)
+.env
+.env.*
+!.env.example
+credentials/
+secrets/
+service-account*.json
+*.pem
+*.key
+
+# Streamlit Local Runtime
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Solver Temporary Runs & Runtime Execution Outputs
+modules/m3_delft3d/runs/*
+!modules/m3_delft3d/runs/.gitkeep
+modules/m4_sph/runs/*
+!modules/m4_sph/runs/.gitkeep
+*.bi4
+*.mdu
+*.bct
+*.nc
+*.stl
+
+# Local SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+!modules/m5_scenario_engine/db/.gitkeep
+
+# System & Application Logs
+*.log
+logs/
+
+# Geospatial Data Policy:
+# KEEP version-controlled:
+# - data/mock/** (synthetic demo fixtures & rasters)
+# - data/rivers/rivers.geojson (saved local river centerlines)
+# IGNORE large external downloads and runtime simulation outputs:
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/**/.gitkeep
+data/terrain/*
+!data/terrain/.gitkeep
+data/scenarios/*
+!data/scenarios/.gitkeep
+data/results/*
+!data/results/.gitkeep
+data/satellite/*
+!data/satellite/.gitkeep
+data/historical/*
+!data/historical/.gitkeep
+data/exports/*
+!data/exports/.gitkeep
+
+# Ignore loose heavy GIS rasters/vectors outside mock fixtures
+*.tif
+*.tiff
+*.geotiff
+!data/mock/**

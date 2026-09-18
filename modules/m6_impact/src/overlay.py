@@ -1,0 +1,1 @@
+"""Impact module: overlay.py."""

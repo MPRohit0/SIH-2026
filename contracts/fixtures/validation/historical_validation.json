@@ -1,0 +1,6 @@
+{
+  "id": "val-hist-001",
+  "event_name": "Chamoli 2021",
+  "depth_rmse": 0.45,
+  "extent_iou": 0.84
+}

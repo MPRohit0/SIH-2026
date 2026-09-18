@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": [],
+  "error": null,
+  "scenario": {
+    "schema_version": "1.0.0",
+    "scenario_id": "demo_dam_exact_001",
+    "site_id": "himalayan_demo_01",
+    "failure_source_id": "demo_dam_01",
+    "severity_index": 64,
+    "severity_level_0_10": null,
+    "initial_conditions": {
+      "initial_water_level_m": 2468.5,
+      "downstream_discharge_m3s": 700.0
+    },
+    "breach": {
+      "breach_width_m": 52.3,
+      "breach_depth_m": 21.1,
+      "formation_time_hr": 0.6,
+      "peak_discharge_m3s": 10150.0,
+      "method": "froehlich"
+    },
+    "discharge_series_id": "hydro_demo_exact_001",
+    "breach_engine_version": "demo-1.0.0",
+    "generated_at": "2026-09-18T16:05:00Z"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "id": "sat-fallback-001",
+  "sensor": "Sentinel-2",
+  "status": "simulated_historical_fallback"
+}

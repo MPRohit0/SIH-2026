@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "sentinel1_sar",
+        "observation_date": "2021-02-07"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.75,
+              30.55
+            ],
+            [
+              79.865,
+              30.55
+            ],
+            [
+              79.875,
+              30.63
+            ],
+            [
+              79.81,
+              30.645
+            ],
+            [
+              79.74,
+              30.61
+            ],
+            [
+              79.75,
+              30.55
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

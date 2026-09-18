@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "mock_domain",
+        "domain": "full_reach"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.72,
+              30.5
+            ],
+            [
+              79.9,
+              30.5
+            ],
+            [
+              79.9,
+              30.65
+            ],
+            [
+              79.72,
+              30.65
+            ],
+            [
+              79.72,
+              30.5
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

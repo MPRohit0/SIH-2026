@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "failure_source_id": "demo_dam_01",
+  "type": "engineered_dam",
+  "name": "Himalayan Demo Dam",
+  "location": {
+    "lon": 79.81,
+    "lat": 30.58
+  },
+  "height_m": 85.0,
+  "storage_volume_m3": 8500000.0,
+  "catchment_area_km2": 125.0,
+  "data_source": "synthetic_demo_dataset"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "status": "error",
+  "warnings": [],
+  "error": {
+    "error_code": "scenario_not_ready",
+    "message": "Scenario library has not finished onboarding for site himalayan_demo_01.",
+    "retryable": true,
+    "details": {
+      "site_id": "himalayan_demo_01",
+      "job_id": "job_demo_onboard_001"
+    }
+  }
+}

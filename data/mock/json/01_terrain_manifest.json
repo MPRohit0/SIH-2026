@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": [],
+  "error": null,
+  "terrain_manifest_id": "terrain_manifest_demo_v1",
+  "site_id": "himalayan_demo_01",
+  "failure_source_id": "demo_dam_01",
+  "dem": {
+    "artifact_id": "dem",
+    "kind": "raster",
+    "media_type": "image/tiff",
+    "url": "/mock-api/artifacts/terrain/dem.tif",
+    "crs": "EPSG:32644",
+    "raster_meta": {
+      "dtype": "float32",
+      "bands": [
+        {
+          "name": "elevation",
+          "unit": "m"
+        }
+      ],
+      "nodata_value": -9999.0,
+      "pixel_size_m": 30.0
+    },
+    "bbox_wgs84": [
+      79.88455164523661,
+      30.535908493434015,
+      79.8877094213543,
+      30.538641880022094
+    ],
+    "checksum": "mock-dem",
+    "available": true
+  },
+  "landcover_classes": {
+    "artifact_id": "landcover",
+    "kind": "raster",
+    "media_type": "image/tiff",
+    "url": "/mock-api/artifacts/terrain/landcover.tif",
+    "crs": "EPSG:32644",
+    "raster_meta": {
+      "dtype": "int16",
+      "bands": [
+        {
+          "name": "landcover_class",
+          "unit": "class"
+        }
+      ],
+      "nodata_value": -9999.0,
+      "pixel_size_m": 30.0
+    },
+    "bbox_wgs84": [
+      79.88455164523661,
+      30.535908493434015,
+      79.8877094213543,
+      30.538641880022094
+    ],
+    "checksum": "mock-landcover",
+    "available": true
+  },
+  "manning_n": {
+    "artifact_id": "manning_n",
+    "kind": "raster",
+    "media_type": "image/tiff",
+    "url": "/mock-api/artifacts/terrain/manning_n.tif",
+    "crs": "EPSG:32644",
+    "raster_meta": {
+      "dtype": "float32",
+      "bands": [
+        {
+          "name": "manning_n",
+          "unit": "dimensionless"
+        }
+      ],
+      "nodata_value": -9999.0,
+      "pixel_size_m": 30.0
+    },
+    "bbox_wgs84": [
+      79.88455164523661,
+      30.535908493434015,
+      79.8877094213543,
+      30.538641880022094
+    ],
+    "checksum": "mock-manning_n",
+    "available": true
+  },
+  "river_centerline": {
+    "artifact_id": "river_centerline",
+    "kind": "vector",
+    "media_type": "application/geo+json",
+    "url": "/mock-api/artifacts/terrain/river_centerline.geojson",
+    "crs": "EPSG:4326",
+    "raster_meta": null,
+    "bbox_wgs84": [
+      79.72,
+      30.5,
+      79.9,
+      30.65
+    ],
+    "checksum": "mock-river_centerline",
+    "available": true
+  },
+  "cross_sections": {
+    "artifact_id": "cross_sections",
+    "kind": "vector",
+    "media_type": "application/geo+json",
+    "url": "/mock-api/artifacts/terrain/cross_sections.geojson",
+    "crs": "EPSG:4326",
+    "raster_meta": null,
+    "bbox_wgs84": [
+      79.72,
+      30.5,
+      79.9,
+      30.65
+    ],
+    "checksum": "mock-cross_sections",
+    "available": true
+  },
+  "sph_boundary_geometry": {
+    "artifact_id": "geometry_stl",
+    "kind": "file",
+    "media_type": "model/stl",
+    "url": "/mock-api/artifacts/terrain/geometry.stl",
+    "crs": null,
+    "raster_meta": null,
+    "bbox_wgs84": [
+      79.72,
+      30.5,
+      79.9,
+      30.65
+    ],
+    "checksum": "mock-geometry_stl",
+    "available": true
+  },
+  "bbox_wgs84": [
+    79.72,
+    30.5,
+    79.9,
+    30.65
+  ],
+  "storage_crs": "EPSG:32644",
+  "api_crs": "EPSG:4326",
+  "dem_resolution_m": 30.0,
+  "generated_at": "2026-09-18T16:00:00Z"
+}

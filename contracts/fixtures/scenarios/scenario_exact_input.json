@@ -1,0 +1,6 @@
+{
+  "id": "scen-exact",
+  "severity": 65,
+  "breach_width_m": 120.0,
+  "breach_time_hr": 1.5
+}

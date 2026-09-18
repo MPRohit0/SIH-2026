@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": [],
+  "error": null,
+  "job_id": "job_demo_onboard_001",
+  "job_type": "onboard_site",
+  "state": "succeeded",
+  "progress_pct": 100.0,
+  "current_step": "COMPLETE",
+  "steps": [
+    {
+      "name": "terrain_processing",
+      "state": "done",
+      "detail": "DEM and Manning raster prepared"
+    },
+    {
+      "name": "breach_parameter_generation",
+      "state": "done",
+      "detail": "6 severity levels generated"
+    },
+    {
+      "name": "delft3d_simulation",
+      "state": "done",
+      "detail": "6/6 scenarios completed"
+    },
+    {
+      "name": "sph_simulation",
+      "state": "done",
+      "detail": "6/6 scenarios completed"
+    },
+    {
+      "name": "validation",
+      "state": "done",
+      "detail": "12 holdout validations completed"
+    },
+    {
+      "name": "cache_publish",
+      "state": "done",
+      "detail": "Scenario library published"
+    }
+  ],
+  "estimated_completion": "2026-09-18T17:05:00Z",
+  "result_ref": "validation_profile_demo_v1",
+  "errors": [],
+  "created_at": "2026-09-18T16:00:00Z",
+  "updated_at": "2026-09-18T17:05:30Z"
+}

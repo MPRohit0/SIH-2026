@@ -1,0 +1,6 @@
+{
+  "id": "sat-live-001",
+  "sensor": "Sentinel-1",
+  "acquisition_time": "2026-09-18T10:00:00Z",
+  "cloud_cover_pct": 0
+}

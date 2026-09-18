@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "status": "partial",
+  "warnings": [
+    {
+      "error_code": "gee_unreachable",
+      "message": "Live GEE request failed; serving cached observation.",
+      "retryable": true,
+      "details": {
+        "source": "sentinel1_sar"
+      }
+    }
+  ],
+  "error": null,
+  "failure_source_id": "demo_dam_01",
+  "observation_date": "2026-09-10",
+  "source": "manual_screenshot",
+  "overlay": {
+    "artifact_id": "satellite_fallback_extent",
+    "kind": "vector",
+    "media_type": "application/geo+json",
+    "url": "/mock-api/artifacts/historical/observed_extent.geojson",
+    "crs": "EPSG:4326",
+    "raster_meta": null,
+    "bbox_wgs84": [
+      79.72,
+      30.5,
+      79.9,
+      30.65
+    ],
+    "checksum": "mock-satellite_fallback_extent",
+    "available": true
+  },
+  "is_fallback": true,
+  "fallback_reason": "gee_unreachable",
+  "fetched_at": "2026-09-18T17:11:00Z"
+}

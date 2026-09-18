@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "delft3d",
+        "t_min": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.79,
+              30.57
+            ],
+            [
+              79.82,
+              30.57
+            ],
+            [
+              79.83,
+              30.59
+            ],
+            [
+              79.81,
+              30.61
+            ],
+            [
+              79.78,
+              30.59
+            ],
+            [
+              79.79,
+              30.57
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

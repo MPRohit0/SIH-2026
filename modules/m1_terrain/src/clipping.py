@@ -1,0 +1,1 @@
+"""Terrain module: clipping.py."""

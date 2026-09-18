@@ -1,0 +1,6 @@
+{
+  "id": "terr-001",
+  "dem_source": "Copernicus 30m",
+  "resolution_m": 30.0,
+  "crs": "EPSG:32643"
+}

@@ -1,0 +1,30 @@
+# ==============================================================================
+# SIH26161 Python Package Dependencies
+# Install via: pip install -r requirements.txt
+# ==============================================================================
+
+# 1. Module 8 Dashboard & Interactive Geospatial UI (Active Implementation)
+streamlit>=1.36.0
+folium>=0.16.0
+streamlit-folium>=0.20.0
+branca>=0.7.0
+
+# 2. Schema Validation & Contracts Engine
+jsonschema>=4.22.0
+fastjsonschema>=2.19.0
+
+# 3. Core Geospatial & Scientific Processing
+numpy>=1.26.0,<2.0.0
+scipy>=1.13.0
+pandas>=2.2.0
+shapely>=2.0.0
+
+# 4. API & Communication Layer
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+httpx>=0.27.0
+
+# 5. Testing & Code Quality
+pytest>=8.2.0
+pytest-asyncio>=0.23.0
+ruff>=0.4.0

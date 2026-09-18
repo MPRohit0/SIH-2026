@@ -1,0 +1,14 @@
+{
+  "POST /scenarios/resolve (slider)": "10_scenario_resolve_request_slider.json -> 12b_scenario_resolution_response_slider.json",
+  "POST /scenarios/resolve (exact)": "11_scenario_resolve_request_exact.json -> 12_scenario_resolution_response_exact.json",
+  "POST /sites/onboard": "13_scenario_onboarding_request.json -> 14_job_status_running.json -> 15_job_status_succeeded.json",
+  "GET /jobs/job_demo_onboard_001": "15_job_status_succeeded.json",
+  "GET /flood?scenario_id=demo_dam_s60_froehlich_v1&models=sph,delft3d": "16_flood_query_response_both.json",
+  "GET /flood?... (partial)": "17_flood_query_response_partial.json",
+  "GET /impact?...": "18_impact_result.json",
+  "GET /impact?... (partial)": "25_impact_result_partial.json",
+  "GET /satellite_overlay?... (live)": "19_satellite_overlay_live.json",
+  "GET /satellite_overlay?... (fallback)": "20_satellite_overlay_fallback.json",
+  "GET /validation/historical?...": "23_historical_validation_response.json",
+  "Error example": "24_error_response_scenario_not_ready.json"
+}

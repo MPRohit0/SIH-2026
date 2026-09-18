@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "source": "mock_terrain",
+        "name": "Demo River"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            79.74,
+            30.52
+          ],
+          [
+            79.78,
+            30.56
+          ],
+          [
+            79.82,
+            30.6
+          ],
+          [
+            79.88,
+            30.64
+          ]
+        ]
+      }
+    }
+  ]
+}

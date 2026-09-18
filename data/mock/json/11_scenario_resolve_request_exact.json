@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "site_id": "himalayan_demo_01",
+  "input_mode": "exact_values",
+  "severity_level_0_10": null,
+  "exact_values": {
+    "initial_water_level_m": 2468.5,
+    "breach_width_m": 52.3,
+    "breach_depth_m": 21.1,
+    "formation_time_hr": 0.6,
+    "downstream_discharge_m3s": 700.0
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": [],
+  "error": null,
+  "scenario_id": "demo_dam_s60_froehlich_v1",
+  "model": "delft3d",
+  "affected_population": 31284,
+  "population_data_availability": "computed",
+  "affected_buildings": 4128,
+  "buildings_data_availability": "computed",
+  "affected_roads_km": 83.2,
+  "roads_data_availability": "computed",
+  "affected_agriculture_km2": 12.4,
+  "agriculture_data_availability": "computed",
+  "critical_infrastructure": [
+    {
+      "type": "hospital",
+      "name": "Demo District Hospital",
+      "location": {
+        "lon": 79.84,
+        "lat": 30.6
+      }
+    },
+    {
+      "type": "school",
+      "name": "Demo Valley School",
+      "location": {
+        "lon": 79.82,
+        "lat": 30.59
+      }
+    }
+  ],
+  "critical_infrastructure_data_availability": "computed",
+  "exports": {
+    "shp": {
+      "artifact_id": "impact_shp",
+      "kind": "file",
+      "media_type": "application/zip",
+      "url": "/mock-api/artifacts/impact/flood_extent_bundle.zip",
+      "crs": null,
+      "raster_meta": null,
+      "bbox_wgs84": [
+        79.72,
+        30.5,
+        79.9,
+        30.65
+      ],
+      "checksum": "mock-impact_shp",
+      "available": true
+    },
+    "kml": {
+      "artifact_id": "impact_kml",
+      "kind": "file",
+      "media_type": "application/vnd.google-earth.kml+xml",
+      "url": "/mock-api/artifacts/impact/flood_extent.kml",
+      "crs": null,
+      "raster_meta": null,
+      "bbox_wgs84": [
+        79.72,
+        30.5,
+        79.9,
+        30.65
+      ],
+      "checksum": "mock-impact_kml",
+      "available": true
+    },
+    "geojson": {
+      "artifact_id": "impact_geojson",
+      "kind": "vector",
+      "media_type": "application/geo+json",
+      "url": "/mock-api/artifacts/historical/observed_extent.geojson",
+      "crs": "EPSG:4326",
+      "raster_meta": null,
+      "bbox_wgs84": [
+        79.72,
+        30.5,
+        79.9,
+        30.65
+      ],
+      "checksum": "mock-impact_geojson",
+      "available": true
+    }
+  },
+  "generated_at": "2026-09-18T17:08:00Z"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "src-dam-001",
+  "type": "engineered_dam",
+  "height_m": 85.0,
+  "reservoir_capacity_m3": 45000000
+}

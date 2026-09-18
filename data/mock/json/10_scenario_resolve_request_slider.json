@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0.0",
+  "site_id": "himalayan_demo_01",
+  "input_mode": "severity_slider",
+  "severity_level_0_10": 6,
+  "exact_values": null
+}

@@ -1,0 +1,6 @@
+{
+  "id": "sim-delft-001",
+  "solver": "delft3d",
+  "max_depth_m": 14.5,
+  "peak_velocity_ms": 6.8
+}

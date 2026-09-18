@@ -1,0 +1,1 @@
+"""Impact module: infrastructure.py."""

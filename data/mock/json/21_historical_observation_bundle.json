@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "demo_event_2021_02_07",
+  "failure_source_id": "demo_dam_01",
+  "historical_event_date": "2021-02-07",
+  "extent": {
+    "artifact_id": "historical_observed_extent",
+    "kind": "vector",
+    "media_type": "application/geo+json",
+    "url": "/mock-api/artifacts/historical/observed_extent.geojson",
+    "crs": "EPSG:4326",
+    "raster_meta": null,
+    "bbox_wgs84": [
+      79.72,
+      30.5,
+      79.9,
+      30.65
+    ],
+    "checksum": "mock-historical_observed_extent",
+    "available": true
+  },
+  "discharge_series": {
+    "series_id": "observed_discharge_demo_2021",
+    "points": [
+      {
+        "t_min": 0,
+        "discharge_m3s": 1200
+      },
+      {
+        "t_min": 10,
+        "discharge_m3s": 3000
+      },
+      {
+        "t_min": 20,
+        "discharge_m3s": 7800
+      },
+      {
+        "t_min": 35,
+        "discharge_m3s": 10200
+      },
+      {
+        "t_min": 60,
+        "discharge_m3s": 5400
+      },
+      {
+        "t_min": 120,
+        "discharge_m3s": 900
+      }
+    ]
+  },
+  "arrival_time_points": [
+    {
+      "location_id": "village_a",
+      "location": {
+        "lon": 79.82,
+        "lat": 30.59
+      },
+      "arrival_time_min": 40
+    },
+    {
+      "location_id": "village_b",
+      "location": {
+        "lon": 79.84,
+        "lat": 30.6
+      },
+      "arrival_time_min": 46
+    },
+    {
+      "location_id": "road_bridge_1",
+      "location": {
+        "lon": 79.85,
+        "lat": 30.61
+      },
+      "arrival_time_min": 52
+    }
+  ],
+  "depth_points": [
+    {
+      "location_id": "village_a",
+      "location": {
+        "lon": 79.82,
+        "lat": 30.59
+      },
+      "depth_m": 3.8
+    },
+    {
+      "location_id": "village_b",
+      "location": {
+        "lon": 79.84,
+        "lat": 30.6
+      },
+      "depth_m": 2.9
+    },
+    {
+      "location_id": "road_bridge_1",
+      "location": {
+        "lon": 79.85,
+        "lat": 30.61
+      },
+      "depth_m": 1.7
+    }
+  ],
+  "velocity_points": [
+    {
+      "location_id": "village_a",
+      "location": {
+        "lon": 79.82,
+        "lat": 30.59
+      },
+      "velocity_ms": 4.2
+    },
+    {
+      "location_id": "village_b",
+      "location": {
+        "lon": 79.84,
+        "lat": 30.6
+      },
+      "velocity_ms": 3.6
+    },
+    {
+      "location_id": "road_bridge_1",
+      "location": {
+        "lon": 79.85,
+        "lat": 30.61
+      },
+      "velocity_ms": 2.4
+    }
+  ],
+  "source_metadata": {
+    "source": "synthetic_demo_observation_set",
+    "fetched_at": "2026-09-18T17:12:00Z"
+  }
+}
